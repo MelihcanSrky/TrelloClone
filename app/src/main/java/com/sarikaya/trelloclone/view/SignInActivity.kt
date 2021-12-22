@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.sarikaya.trelloclone.R
 import com.sarikaya.trelloclone.databinding.ActivitySignInBinding
+import com.sarikaya.trelloclone.model.User
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 private lateinit var binding : ActivitySignInBinding
@@ -36,6 +37,11 @@ class SignInActivity : BaseActivity() {
         }
         setupActionBar()
 
+    }
+
+    fun signInSuccess(user : User){
+        hideProgressDialog()
+        startActivity(Intent(this,MainActivity::class.java))
     }
 
     private fun setupActionBar(){

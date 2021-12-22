@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager.LayoutParams.*
 import com.sarikaya.trelloclone.databinding.ActivitySplashScreenBinding
+import com.sarikaya.trelloclone.firebase.FireStoreClass
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -27,7 +28,14 @@ class SplashScreenActivity : AppCompatActivity() {
         binding.tvAppName.typeface = typeFace
 
         Handler().postDelayed({
-            startActivity(Intent(this, IntroActivity::class.java))
+
+            var currentUserId = FireStoreClass().getCurrentUser()
+
+            if(currentUserId.isNotEmpty()){
+                startActivity(Intent(this, MainActivity::class.java))
+            }else{
+                startActivity(Intent(this, IntroActivity::class.java))
+            }
             finish()
         },2500)
     }
